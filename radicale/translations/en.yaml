@@ -1,0 +1,7 @@
+config:
+  _.config:
+    RADICALE_CONFIG_AUTH_TYPE: "Authentication type (none, htpasswd, remote_user, etc.)"
+    RADICALE_CONFIG_AUTH_HTPASSWD_FILENAME: "Path to the htpasswd file"
+    RADICALE_CONFIG_AUTH_HTPASSWD_ENCRYPTION: "Hashing algorithm for htpasswd (bcrypt, apr_md5_crypt)"
+    RADICALE_CONFIG_STORAGE_FILESYSTEM_FOLDER: "Directory to store calendar/contact collections"
+    RADICALE_CONFIG_SERVER_HOSTS: "Server bind address and port"
