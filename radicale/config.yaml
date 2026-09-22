@@ -1,5 +1,5 @@
 name: Radicale
-version: "3.8.0.0"
+version: "3.8.0"
 slug: radicale
 description: >-
   Radicale is a small but powerful CalDAV (calendars, to-do lists) and
@@ -8,27 +8,24 @@ url: "https://radicale.org/"
 arch:
   - amd64
   - aarch64
-  - armv7
-  - i386
+init: false
+startup: application
+boot: auto
+webui: "http://[HOST]:[PORT:5232]"
 ports:
   5232/tcp: 5232
+ports_description:
+  5232/tcp: "Radicale CalDAV/CardDAV server"
 map:
   - type: share
     read_only: false
-    path: /data
-boot: auto
-watchdog: true
-init: false
-startup: application
 options:
-  RADICALE_CONFIG_AUTH_TYPE: "none"
-  RADICALE_CONFIG_AUTH_HTPASSWD_FILENAME: /data/users
-  RADICALE_CONFIG_AUTH_HTPASSWD_ENCRYPTION: bcrypt
-  RADICALE_CONFIG_STORAGE_FILESYSTEM_FOLDER: /data/collections
-  RADICALE_CONFIG_SERVER_HOSTS: 0.0.0.0:5232
+  auth_type: "none"
+  storage_folder: "/data/collections"
+  server_hosts: "0.0.0.0:5232"
+  log_level: "info"
 schema:
-  RADICALE_CONFIG_AUTH_TYPE?: str
-  RADICALE_CONFIG_AUTH_HTPASSWD_FILENAME?: str
-  RADICALE_CONFIG_AUTH_HTPASSWD_ENCRYPTION?: str
-  RADICALE_CONFIG_STORAGE_FILESYSTEM_FOLDER?: str
-  RADICALE_CONFIG_SERVER_HOSTS?: str
+  auth_type: "list(none|htpasswd)"
+  storage_folder: str
+  server_hosts: str
+  log_level: "list(debug|info|warning|error|critical)"

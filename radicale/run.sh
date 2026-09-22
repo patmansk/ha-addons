@@ -11,22 +11,18 @@ if [ ! -f "${CONFIG_PATH}" ]; then
     exit 1
 fi
 
-auth_type="$(jq --raw-output '.RADICALE_CONFIG_AUTH_TYPE // "none"' "${CONFIG_PATH}")"
-htpasswd_filename="$(jq --raw-output '.RADICALE_CONFIG_AUTH_HTPASSWD_FILENAME // "/data/users"' "${CONFIG_PATH}")"
-htpasswd_encryption="$(jq --raw-output '.RADICALE_CONFIG_AUTH_HTPASSWD_ENCRYPTION // "bcrypt"' "${CONFIG_PATH}")"
-storage_folder="$(jq --raw-output '.RADICALE_CONFIG_STORAGE_FILESYSTEM_FOLDER // "/data/collections"' "${CONFIG_PATH}")"
-server_hosts="$(jq --raw-output '.RADICALE_CONFIG_SERVER_HOSTS // "0.0.0.0:5232"' "${CONFIG_PATH}")"
+auth_type="$(jq --raw-output '.auth_type // "none"' "${CONFIG_PATH}")"
+storage_folder="$(jq --raw-output '.storage_folder // "/data/collections"' "${CONFIG_PATH}")"
+server_hosts="$(jq --raw-output '.server_hosts // "0.0.0.0:5232"' "${CONFIG_PATH}")"
+log_level="$(jq --raw-output '.log_level // "info"' "${CONFIG_PATH}")"
 
 log "Starting Radicale add-on..."
 log "  Auth type    : ${auth_type}"
 log "  Storage      : ${storage_folder}"
 log "  Server hosts : ${server_hosts}"
+log "  Log level    : ${log_level}"
 
 mkdir -p "${storage_folder}"
-
-if [ "${auth_type}" = "htpasswd" ]; then
-    log "Using htpasswd auth: ${htpasswd_filename}"
-fi
 
 {
     echo '[server]'
@@ -35,12 +31,15 @@ fi
     echo '[auth]'
     echo "type = ${auth_type}"
     if [ "${auth_type}" = "htpasswd" ]; then
-        echo "htpasswd_filename = ${htpasswd_filename}"
-        echo "htpasswd_encryption = ${htpasswd_encryption}"
+        echo 'htpasswd_filename = /data/users'
+        echo 'htpasswd_encryption = bcrypt'
     fi
     echo ''
     echo '[storage]'
     echo "filesystem_folder = ${storage_folder}"
+    echo ''
+    echo '[logging]'
+    echo "level = ${log_level}"
     echo ''
     echo '[web]'
     echo 'prefix = /'
