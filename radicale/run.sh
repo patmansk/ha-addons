@@ -23,7 +23,7 @@ log "Starting Radicale add-on..."
 log "  Auth type    : ${auth_type}"
 log "  Storage      : ${storage_folder}"
 log "  Log level    : ${log_level}"
-log "  Sharing      : ${sharing_type}"
+log "  Sharing      : ${sharing_type} (Will be ignored if unsupported by this Radicale version)"
 
 mkdir -p "${storage_folder}"
 chown -R radicale:radicale "${storage_folder}" 2>/dev/null || true
@@ -45,20 +45,22 @@ chown -R radicale:radicale "${storage_folder}" 2>/dev/null || true
     echo ''
     echo '[logging]'
     echo "level = ${log_level}"
-    
-    # Add sharing config if enabled
-    if [ "${sharing_type}" != "none" ]; then
-        echo ''
-        echo '[sharing]'
-        if [ "${sharing_type}" = "default" ]; then
-        echo "type = radicale.sharing.default"
-    else
-        echo "type = ${sharing_type}"
-    fi
-        echo "permit_create_token = true"
-        echo "permit_create_map = true"
-    fi
+    echo ''
+    echo '[rights]'
+    echo 'type = owner_only'
+    echo ''
+    echo '[web]'
+    echo 'type = internal'
 } > "${RADICALE_CONFIG}"
+
+# Only add sharing if explicitly enabled AND if we are sure the module exists.
+# For now, we disable it in config to prevent startup crashes in 3.8.0.
+# Sharing can be enabled via API or a different version if needed.
+if [ "${sharing_type}" != "none" ]; then
+    log "WARNING: Sharing is enabled in options, but disabled in config to prevent startup errors."
+    log "Please update to a Radicale version with stable 'default' sharing support if you need this feature."
+    # We do NOT write [sharing] section to avoid 'No module named' crash
+fi
 
 chown radicale:radicale "${RADICALE_CONFIG}" 2>/dev/null || true
 
