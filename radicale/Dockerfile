@@ -1,8 +1,5 @@
 FROM alpine:3.19
 
-ARG VERSION=3.8.4
-ENV RADICALE_VERSION=${VERSION}
-
 # Install dependencies
 RUN apk add --no-cache python3 py3-pip openssl jq
 
@@ -10,11 +7,10 @@ RUN apk add --no-cache python3 py3-pip openssl jq
 RUN addgroup -g 2999 -S radicale && \
     adduser -u 2999 -S -D -G radicale -h /data -s /sbin/nologin radicale
 
-# Install Radicale in a virtualenv
-# We try to install with the 'sharing' extra to ensure sharing modules are available
+# Install Radicale 3.8.0 (stable version with csv sharing support)
+# We hardcode 3.8.0 to avoid build-arg/cache issues.
 RUN python3 -m venv /venv && \
-    /venv/bin/pip install --no-cache-dir "radicale[sharing]==${RADICALE_VERSION}" || \
-    /venv/bin/pip install --no-cache-dir "radicale==${RADICALE_VERSION}"
+    /venv/bin/pip install --no-cache-dir "radicale==3.8.0"
 
 # Prepare data directory
 RUN mkdir -p /data/collections && \
