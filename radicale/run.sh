@@ -6,6 +6,9 @@ RADICALE_CONFIG="/tmp/radicale.conf"
 
 log() { echo "[$(date '+%H:%M:%S')] $1"; }
 
+# Fix permissions on /data (we run as root initially)
+chown -R radicale:radicale /data 2>/dev/null || true
+
 if [ ! -f "${CONFIG_PATH}" ]; then
     log "FATAL: Options file ${CONFIG_PATH} not found!"
     exit 1
@@ -21,6 +24,7 @@ log "  Storage      : ${storage_folder}"
 log "  Log level    : ${log_level}"
 
 mkdir -p "${storage_folder}"
+chown -R radicale:radicale "${storage_folder}" 2>/dev/null || true
 
 {
     echo '[server]'
@@ -43,5 +47,8 @@ mkdir -p "${storage_folder}"
     echo 'prefix = /'
 } > "${RADICALE_CONFIG}"
 
+chown radicale:radicale "${RADICALE_CONFIG}" 2>/dev/null || true
+
 log "Starting Radicale..."
-exec /venv/bin/radicale --config "${RADICALE_CONFIG}"
+# Drop to non-root user for the actual service
+exec su -s /bin/sh radicale -c "exec /venv/bin/radicale --config ${RADICALE_CONFIG}"

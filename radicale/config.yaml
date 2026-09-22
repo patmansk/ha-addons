@@ -1,5 +1,5 @@
 name: Radicale
-version: "3.8.1"
+version: "1.0.1"
 slug: radicale
 description: >-
   Radicale is a small but powerful CalDAV (calendars, to-do lists) and
