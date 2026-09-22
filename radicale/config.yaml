@@ -18,8 +18,8 @@ map:
     path: /data
 boot: auto
 watchdog: true
-init: true
-startup: 5
+init: false
+startup: application
 options:
   RADICALE_CONFIG_AUTH_TYPE: "none"
   RADICALE_CONFIG_AUTH_HTPASSWD_FILENAME: /data/users
