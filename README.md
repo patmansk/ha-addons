@@ -2,8 +2,6 @@
 
 Collection of Home Assistant OS add-ons.
 
-[![Add repository to Home Assistant](https://my.home-assistant.io/badges/supervisor_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_addon_repository/?repository_url=https://github.com/patmansk/ha-addons)
-
 ## Installation
 
 1. In Home Assistant, go to **Settings -> Add-ons -> Add-on Store**.
@@ -27,14 +25,6 @@ Collection of Home Assistant OS add-ons.
 &emsp;&emsp;![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fpatmansk%2Fha-addons%2Fmain%2Fradicale-decsync%2Fconfig.yaml)
 ![aarch64][aarch64-badge]
 ![amd64][amd64-badge]
-
-## Maintainer
-
-- [patmansk](https://github.com/patmansk)
-
-## License
-
-MIT
 
 [aarch64-badge]: https://img.shields.io/badge/-aarch64-blue?style=flat
 [amd64-badge]: https://img.shields.io/badge/-amd64-blue?style=flat
