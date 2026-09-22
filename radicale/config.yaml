@@ -1,9 +1,9 @@
 name: Radicale
-version: "3.8.3"
+version: "3.8.4"
 slug: radicale
 description: >-
   Radicale is a small but powerful CalDAV (calendars, to-do lists) and
-  CardDAV (contacts) server. Supports htpasswd authentication.
+  CardDAV (contacts) server. Supports htpasswd authentication and sharing.
 url: "https://radicale.org/"
 arch:
   - amd64
@@ -23,7 +23,9 @@ options:
   auth_type: "none"
   storage_folder: "/data/collections"
   log_level: "info"
+  sharing: "none"
 schema:
   auth_type: "list(none|htpasswd)"
   storage_folder: str
   log_level: "list(debug|info|warning|error|critical)"
+  sharing: "list(none|default)"

@@ -17,16 +17,18 @@ fi
 auth_type="$(jq --raw-output '.auth_type // "none"' "${CONFIG_PATH}")"
 storage_folder="$(jq --raw-output '.storage_folder // "/data/collections"' "${CONFIG_PATH}")"
 log_level="$(jq --raw-output '.log_level // "info"' "${CONFIG_PATH}")"
+sharing_type="$(jq --raw-output '.sharing // "none"' "${CONFIG_PATH}")"
 
 log "Starting Radicale add-on..."
 log "  Auth type    : ${auth_type}"
 log "  Storage      : ${storage_folder}"
 log "  Log level    : ${log_level}"
+log "  Sharing      : ${sharing_type}"
 
 mkdir -p "${storage_folder}"
 chown -R radicale:radicale "${storage_folder}" 2>/dev/null || true
 
-# Generate Radicale config (valid for Radicale 3.8)
+# Generate Radicale config
 {
     echo '[server]'
     echo 'hosts = 0.0.0.0:5232'
@@ -43,6 +45,15 @@ chown -R radicale:radicale "${storage_folder}" 2>/dev/null || true
     echo ''
     echo '[logging]'
     echo "level = ${log_level}"
+    
+    # Add sharing config if enabled
+    if [ "${sharing_type}" != "none" ]; then
+        echo ''
+        echo '[sharing]'
+        echo "type = ${sharing_type}"
+        echo "permit_create_token = true"
+        echo "permit_create_map = true"
+    fi
 } > "${RADICALE_CONFIG}"
 
 chown radicale:radicale "${RADICALE_CONFIG}" 2>/dev/null || true
