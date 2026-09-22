@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 set -e
 
 CONFIG_PATH="/data/options.json"
@@ -13,20 +13,18 @@ fi
 
 auth_type="$(jq --raw-output '.auth_type // "none"' "${CONFIG_PATH}")"
 storage_folder="$(jq --raw-output '.storage_folder // "/data/collections"' "${CONFIG_PATH}")"
-server_hosts="$(jq --raw-output '.server_hosts // "0.0.0.0:5232"' "${CONFIG_PATH}")"
 log_level="$(jq --raw-output '.log_level // "info"' "${CONFIG_PATH}")"
 
 log "Starting Radicale add-on..."
 log "  Auth type    : ${auth_type}"
 log "  Storage      : ${storage_folder}"
-log "  Server hosts : ${server_hosts}"
 log "  Log level    : ${log_level}"
 
 mkdir -p "${storage_folder}"
 
 {
     echo '[server]'
-    echo "hosts = ${server_hosts}"
+    echo 'hosts = 0.0.0.0:5232'
     echo ''
     echo '[auth]'
     echo "type = ${auth_type}"
