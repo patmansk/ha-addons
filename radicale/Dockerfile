@@ -11,8 +11,10 @@ RUN addgroup -g 2999 -S radicale && \
     adduser -u 2999 -S -D -G radicale -h /data -s /sbin/nologin radicale
 
 # Install Radicale in a virtualenv
+# We try to install with the 'sharing' extra to ensure sharing modules are available
 RUN python3 -m venv /venv && \
-    /venv/bin/pip install --no-cache-dir radicale==${RADICALE_VERSION}
+    /venv/bin/pip install --no-cache-dir "radicale[sharing]==${RADICALE_VERSION}" || \
+    /venv/bin/pip install --no-cache-dir "radicale==${RADICALE_VERSION}"
 
 # Prepare data directory
 RUN mkdir -p /data/collections && \

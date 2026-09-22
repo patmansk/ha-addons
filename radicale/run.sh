@@ -50,7 +50,11 @@ chown -R radicale:radicale "${storage_folder}" 2>/dev/null || true
     if [ "${sharing_type}" != "none" ]; then
         echo ''
         echo '[sharing]'
+        if [ "${sharing_type}" = "default" ]; then
+        echo "type = radicale.sharing.default"
+    else
         echo "type = ${sharing_type}"
+    fi
         echo "permit_create_token = true"
         echo "permit_create_map = true"
     fi
