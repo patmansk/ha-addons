@@ -26,6 +26,7 @@ log "  Log level    : ${log_level}"
 mkdir -p "${storage_folder}"
 chown -R radicale:radicale "${storage_folder}" 2>/dev/null || true
 
+# Generate Radicale config (valid for Radicale 3.8)
 {
     echo '[server]'
     echo 'hosts = 0.0.0.0:5232'
@@ -42,9 +43,6 @@ chown -R radicale:radicale "${storage_folder}" 2>/dev/null || true
     echo ''
     echo '[logging]'
     echo "level = ${log_level}"
-    echo ''
-    echo '[web]'
-    echo 'prefix = /'
 } > "${RADICALE_CONFIG}"
 
 chown radicale:radicale "${RADICALE_CONFIG}" 2>/dev/null || true
