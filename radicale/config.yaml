@@ -10,7 +10,6 @@ arch:
   - aarch64
   - armv7
   - i386
-image: tomsquest/docker-radicale:3.8.0.0
 ports:
   5232/tcp: 5232
 map:
