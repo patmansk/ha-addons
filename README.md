@@ -1,79 +1,32 @@
 # HA Add-ons
 
-[![HA Add-ons](https://img.shields.io/badge/Home%20Assistant-Add--ons-blue)](https://www.home-assistant.io/addons/store/)
-
 Collection of Home Assistant OS add-ons.
 
-## Available Add-ons
-
-| Add-on | Version | Description |
-|--------|---------|-------------|
-| [Radicale](radicale/) | 3.8.0.0 | CalDAV & CardDAV server (calendars, to-do lists, contacts) with htpasswd authentication |
-| [Radicale DecSync](radicale-decsync/) | 1.2.12 | Radicale with DecSync storage integration for serverless calendar and contact synchronization |
+[![Add repository to Home Assistant](https://my.home-assistant.io/badges/supervisor_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_addon_repository/?repository_url=https://github.com/patmansk/ha-addons)
 
 ## Installation
 
-1. **Add this repository to Home Assistant:**
-   - Go to **Settings → Add-ons → Add-on Store** (bottom-right)
-   - Click the three-dot menu (top-right) → **Repositories**
-   - Paste the URL: `https://github.com/patmansk/ha-addons`
-   - Click **Add**
+1. In Home Assistant, go to **Settings -> Add-ons -> Add-on Store**.
+2. Click **⋮** (top-right) -> **Repositories**.
+3. Add this repository URL:
+   ```
+   https://github.com/patmansk/ha-addons
+   ```
+4. Find the desired add-on in the store and click **Install**.
 
-2. **Install the desired add-on:**
-   - In the Add-on Store, find "Radicale" or "Radicale DecSync"
-   - Click **Install**
-   - Configure options as needed
-   - **Start** the add-on
+## Add-ons
 
-## Add-on Details
+&#10003; [Radicale](radicale/) : CalDAV & CardDAV server (calendars, to-do lists, contacts)
 
-### Radicale
+&emsp;&emsp;![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fpatmansk%2Fha-addons%2Fmain%2Fradicale%2Fconfig.yaml)
+![aarch64][aarch64-badge]
+![amd64][amd64-badge]
 
-A lightweight CalDAV (calendars, to-do lists) and CardDAV (contacts) server.
+&#10003; [Radicale DecSync](radicale-decsync/) : Radicale with DecSync storage for serverless calendar and contact synchronization
 
-- Based on [tomsquest/docker-radicale](https://hub.docker.com/r/tomsquest/docker-radicale) image
-- htpasswd authentication support
-- Persistent storage via shared folder
-- Configurable via add-on options (auth, storage, server binding)
-
-📖 [Documentation](radicale/DOCS.md) | [Changelog](radicale/CHANGELOG.md)
-
-### Radicale DecSync
-
-Radicale with integrated DecSync storage for serverless calendar and contact synchronization.
-
-- No local storage required – data synced via DecSync
-- Automatic DecSync integration
-
-📖 [Documentation](radicale-decsync/DOCS.md) | [Changelog](radicale-decsync/CHANGELOG.md)
-
-## Repository Structure
-
-```
-ha-addons/
-├── repository.yaml              # HA repository metadata
-├── .github/workflows/
-│   └── release.yml             # Automated release on version change
-├── radicale/                   # Radicale add-on
-│   ├── config.yaml
-│   ├── Dockerfile
-│   ├── README.md
-│   ├── DOCS.md
-│   ├── CHANGELOG.md
-│   ├── icon.png
-│   └── translations/
-└── radicale-decsync/           # Radicale DecSync add-on
-    ├── config.yaml
-    ├── Dockerfile
-    ├── README.md
-    ├── DOCS.md
-    ├── CHANGELOG.md
-    ├── icon.png
-    ├── logo.png
-    ├── patch_compatibility.py
-    ├── run.sh
-    └── translations/
-```
+&emsp;&emsp;![Version](https://img.shields.io/badge/dynamic/yaml?label=Version&query=%24.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Fpatmansk%2Fha-addons%2Fmain%2Fradicale-decsync%2Fconfig.yaml)
+![aarch64][aarch64-badge]
+![amd64][amd64-badge]
 
 ## Maintainer
 
@@ -82,3 +35,6 @@ ha-addons/
 ## License
 
 MIT
+
+[aarch64-badge]: https://img.shields.io/badge/-aarch64-blue?style=flat
+[amd64-badge]: https://img.shields.io/badge/-amd64-blue?style=flat
