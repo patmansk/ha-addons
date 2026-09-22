@@ -1,6 +1,6 @@
 FROM alpine:3.19
 
-ARG VERSION=3.8.0
+ARG VERSION=3.8.4
 ENV RADICALE_VERSION=${VERSION}
 
 # Install dependencies
