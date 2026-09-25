@@ -1,0 +1,76 @@
+name: Build & Push Radicale Image
+
+on:
+  push:
+    paths:
+      - 'radicale/Dockerfile'
+      - 'radicale/run.sh'
+      - 'radicale/config.yaml'
+    branches:
+      - main
+  workflow_dispatch:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}/radicale
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+
+    strategy:
+      matrix:
+        platform:
+          - amd64
+          - aarch64
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Extract version from config.yaml
+        id: version
+        run: |
+          VER=$(grep '^version:' radicale/config.yaml | awk '{print $2}' | tr -d '"')
+          echo "VERSION=${VER}" >> $GITHUB_ENV
+
+      - name: Set up QEMU (for cross-platform builds)
+        if: matrix.platform == 'aarch64'
+        uses: docker/setup-qemu-action@v3
+
+      - name: Set up Docker Buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v3
+        with:
+          driver-opts: network=host
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata for tags and labels
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/${{ github.repository }}/radicale
+          tags: |
+            type=semver,pattern={{version}},value=${{ env.VERSION }}
+            type=raw,value=${{ matrix.platform }}
+            type=raw,value=latest
+
+      - name: Build and push
+        uses: docker/build-push-action@v6
+        with:
+          context: radicale
+          platforms: linux/${{ matrix.platform }}
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/radicale:latest
+          cache-to: type=registry,ref=ghcr.io/${{ github.repository }}/radicale:latest,mode=max
