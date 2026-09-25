@@ -1,5 +1,9 @@
 # Changelog
 
+## 3.8.7
+
+- Bumped version to 3.8.7 to trigger add-on update detection in HAOS (feature changes from 3.8.6 already included)
+
 ## 3.8.6
 
 - Added `conversion_bday_*` options for birthday calendar conversion
