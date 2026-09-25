@@ -18,7 +18,7 @@ RUN apk add --no-cache \
 # `libpass >= 1.9.3` for htpasswd bcrypt hashing.
 RUN pip3 install --no-cache-dir \
     "setuptools<81" \
-    radicale==3.8.0 \
+    radicale==3.8.1 \
     bcrypt \
     "libpass>=1.9.3" \
     radicale_storage_decsync==2.1.0

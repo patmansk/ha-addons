@@ -1,6 +1,12 @@
 # Changelog
 
 
+## 1.2.13
+- **Update:** Radicale auf 3.8.1 aktualisiert (Fixes für Issue #2237)
+
+## 1.2.12
+- **Fix:** Compatibility adjustments for Radicale 3.8.0 (see 1.2.10/1.2.11 entries)
+
 ## 1.2.11
 - **Feature:** `[sharing]` – `collection_by_map = true` + `permit_create_map = true` + `database_path` ergaenzt; aktiviert map-basiertes Sharing (u. a. fuer den eingebauten Geburtstagskalender / Conversion=bday in Radicale 3.8)
 
