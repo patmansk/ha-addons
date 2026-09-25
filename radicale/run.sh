@@ -65,10 +65,17 @@ chown -R radicale:radicale "${RADICALE_DATA}/collection-db" 2>/dev/null || true
     echo 'collection_by_map = true'
     echo 'permit_create_map = true'
     echo "database_path = ${RADICALE_DATA}/collection-db/sharing.csv"
-    echo "conversion_bday_summary_template = ${bday_summary_template}"
-    echo "conversion_bday_description_template = ${bday_description_template}"
-    echo "conversion_bday_alarm_trigger_template = ${bday_alarm_trigger_template}"
-    echo "conversion_bday_categories = ${bday_categories}"
+    # Escape newlines and special chars for INI format (Radicale expects single line)
+    # The templates from config might contain newlines which break INI. We replace them.
+    bday_summary_safe=$(echo "${bday_summary_template}" | sed ':a;N;$!ba;s/\n/\\n/g')
+    bday_desc_safe=$(echo "${bday_description_template}" | sed ':a;N;$!ba;s/\n/\\n/g')
+    bday_alarm_safe=$(echo "${bday_alarm_trigger_template}" | sed ':a;N;$!ba;s/\n/\\n/g')
+    bday_cats_safe=$(echo "${bday_categories}" | sed ':a;N;$!ba;s/\n/\\n/g')
+
+    echo "conversion_bday_summary_template = ${bday_summary_safe}"
+    echo "conversion_bday_description_template = ${bday_desc_safe}"
+    echo "conversion_bday_alarm_trigger_template = ${bday_alarm_safe}"
+    echo "conversion_bday_categories = ${bday_cats_safe}"
     echo "conversion_bday_age_max = ${bday_age_max}"
     echo ''
     echo '[web]'

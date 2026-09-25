@@ -1,5 +1,14 @@
 # Changelog
 
+## 3.8.9
+
+- Fixed runtime error when using `conversion_bday_summary_template` with multiple VEVENTs
+- Improved template handling to prevent INI format breaks with special characters
+
+## 3.8.8
+
+- Bumped version to 3.8.8 to trigger add-on update detection in HAOS
+
 ## 3.8.7
 
 - Bumped version to 3.8.7 to trigger add-on update detection in HAOS (feature changes from 3.8.6 already included)
