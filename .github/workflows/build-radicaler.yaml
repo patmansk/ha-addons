@@ -21,12 +21,6 @@ jobs:
       contents: read
       packages: write
 
-    strategy:
-      matrix:
-        platform:
-          - amd64
-          - aarch64
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -38,7 +32,6 @@ jobs:
           echo "VERSION=${VER}" >> $GITHUB_ENV
 
       - name: Set up QEMU (for cross-platform builds)
-        if: matrix.platform == 'aarch64'
         uses: docker/setup-qemu-action@v3
 
       - name: Set up Docker Buildx
@@ -61,14 +54,13 @@ jobs:
           images: ghcr.io/${{ github.repository }}/radicale
           tags: |
             type=semver,pattern={{version}},value=${{ env.VERSION }}
-            type=raw,value=${{ matrix.platform }}
             type=raw,value=latest
 
       - name: Build and push
         uses: docker/build-push-action@v6
         with:
           context: radicale
-          platforms: linux/${{ matrix.platform }}
+          platforms: linux/amd64,linux/aarch64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}

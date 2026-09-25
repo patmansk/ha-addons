@@ -3,6 +3,7 @@ icon: icon.png
 logo: logo.png
 documentation: DOCS.md
 version: "3.9.1"
+image: ghcr.io/patmansk/ha-addons/radicale:3.9.1
 slug: radicale
 description: >-
   Radicale is a small but powerful CalDAV (calendars, to-do lists) and
