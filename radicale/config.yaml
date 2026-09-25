@@ -2,6 +2,8 @@ name: Radicale
 version: "3.9.1"
 image: "ghcr.io/patmansk/ha-addons/radicale:3.9.1"
 slug: radicale
+icon: icon.png
+logo: logo.png
 description: >-
   Radicale is a small but powerful CalDAV (calendars, to-do lists) and
   CardDAV (contacts) server. Supports htpasswd authentication and sharing.
