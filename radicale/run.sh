@@ -20,11 +20,11 @@ storage_folder="$(jq --raw-output '.storage_folder // "/data/collections"' "${CO
 log_level="$(jq --raw-output '.log_level // "info"' "${CONFIG_PATH}")"
 sharing_enabled="$(jq --raw-output '.sharing // true' "${CONFIG_PATH}")"
 # Radicale 3.8.1 natively supports conversion_bday within the [sharing] section
-bday_summary_template="$(jq --raw-output '.bday_summary_template // "[{n:f} {n:g}|{fn}|{nickname}] ({year}) (BDAY)"' "${CONFIG_PATH}")"
-bday_description_template="$(jq --raw-output '.bday_description_template // "BDAY={year}-{month}-{day}"' "${CONFIG_PATH}")"
-bday_alarm_trigger_template="$(jq --raw-output '.bday_alarm_trigger_template // ""' "${CONFIG_PATH}")"
-bday_categories="$(jq --raw-output '.bday_categories // "Birthday"' "${CONFIG_PATH}")"
-bday_age_max="$(jq --raw-output '.bday_age_max // 0' "${CONFIG_PATH}")"
+bday_summary_template="$(jq --raw-output '.conversion_bday_summary_template // "[{n:f} {n:g}|{fn}|{nickname}] ({year}) (BDAY)"' "${CONFIG_PATH}")"
+bday_description_template="$(jq --raw-output '.conversion_bday_description_template // "BDAY={year}-{month}-{day}"' "${CONFIG_PATH}")"
+bday_alarm_trigger_template="$(jq --raw-output '.conversion_bday_alarm_trigger_template // ""' "${CONFIG_PATH}")"
+bday_categories="$(jq --raw-output '.conversion_bday_categories // "Birthday"' "${CONFIG_PATH}")"
+bday_age_max="$(jq --raw-output '.conversion_bday_age_max // 0' "${CONFIG_PATH}")"
 
 log "Starting Radicale add-on..."
 log "  Auth type    : ${auth_type}"
