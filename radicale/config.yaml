@@ -28,7 +28,7 @@ options:
   bday_description_template: "BDAY={year}-{month}-{day}"
   bday_alarm_trigger_template: ""
   bday_categories: "Birthday"
-  bday_age_max: 99
+  bday_age_max: 0
 schema:
   auth_type: "list(none|htpasswd)"
   storage_folder: str

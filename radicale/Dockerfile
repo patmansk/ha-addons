@@ -10,7 +10,7 @@ RUN addgroup -g 2999 -S radicale && \
 # Install Radicale 3.8.0 (stable version with csv sharing support)
 # We hardcode 3.8.0 to avoid build-arg/cache issues.
 RUN python3 -m venv /venv && \
-    /venv/bin/pip install --no-cache-dir "radicale==3.8.0"
+    /venv/bin/pip install --no-cache-dir "radicale==3.8.1"
 
 # Prepare data directory
 RUN mkdir -p /data/collections && \

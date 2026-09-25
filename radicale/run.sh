@@ -24,7 +24,7 @@ bday_summary_template="$(jq --raw-output '.bday_summary_template // "[{n:f} {n:g
 bday_description_template="$(jq --raw-output '.bday_description_template // "BDAY={year}-{month}-{day}"' "${CONFIG_PATH}")"
 bday_alarm_trigger_template="$(jq --raw-output '.bday_alarm_trigger_template // ""' "${CONFIG_PATH}")"
 bday_categories="$(jq --raw-output '.bday_categories // "Birthday"' "${CONFIG_PATH}")"
-bday_age_max="$(jq --raw-output '.bday_age_max // 99' "${CONFIG_PATH}")"
+bday_age_max="$(jq --raw-output '.bday_age_max // 0' "${CONFIG_PATH}")"
 
 log "Starting Radicale add-on..."
 log "  Auth type    : ${auth_type}"

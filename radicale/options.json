@@ -1,0 +1,60 @@
+{
+    "title": "Radicale",
+    "schema": {
+        "auth_type": {
+            "title": "Authentication type",
+            "description": "Which authentication method to use",
+            "type": "string",
+            "enum": [
+                "auto",
+                "remote_user",
+                "none"
+            ],
+            "default": "auto"
+        },
+        "storage_folder": {
+            "title": "Storage folder",
+            "description": "Path to the folder where collections are stored",
+            "type": "string",
+            "default": "/data/collections"
+        },
+        "log_level": {
+            "title": "Log level",
+            "description": "Logging level",
+            "type": "string",
+            "enum": [
+                "critical",
+                "error",
+                "warning",
+                "info",
+                "debug",
+                "trace"
+            ],
+            "default": "warning"
+        },
+        "conversion_bday_summary_template": {
+            "title": "Birthday summary template",
+            "description": "Template for the summary of converted birthday events. Supports placeholders: {name}, {first}, {last}, {age}",
+            "type": "string",
+            "default": "{first} turns {age}"
+        },
+        "conversion_bday_description_template": {
+            "title": "Birthday description template",
+            "description": "Template for the description of converted birthday events. Supports placeholders: {name}, {first}, {last}, {age}",
+            "type": "string",
+            "default": "Happy Birthday {first}! You are now {age} years old."
+        },
+        "conversion_bday_age_max": {
+            "title": "Birthday max age",
+            "description": "Maximum age to generate separate events for. Set to 0 for standard yearly recurrence (recommended to avoid 'Multiple main components' error). If > 0, generates one event per year up to this age.",
+            "type": "integer",
+            "default": 0
+        },
+        "conversion_bday_alarm_trigger_template": {
+            "title": "Birthday alarm trigger",
+            "description": "Alarm trigger for birthday events (e.g., 'PT-1H' for 1 hour before). Use $ to separate multiple alarms. Supports placeholders in description.",
+            "type": "string",
+            "default": "PT0S;Happy Birthday!"
+        }
+    }
+}
