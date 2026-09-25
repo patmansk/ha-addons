@@ -55,6 +55,12 @@
             "description": "Alarm trigger for birthday events (e.g., 'PT-1H' for 1 hour before). Use $ to separate multiple alarms. Supports placeholders in description.",
             "type": "string",
             "default": "PT0S;Happy Birthday!"
+        },
+        "conversion_bday_categories": {
+            "title": "Birthday calendar categories",
+            "description": "Comma-separated list of calendar categories for birthday events",
+            "type": "string",
+            "default": "Birthday"
         }
     }
 }
