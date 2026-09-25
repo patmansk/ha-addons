@@ -1,12 +1,13 @@
 name: Radicale
-version: "3.9.1"
-image: "ghcr.io/patmansk/ha-addons/radicale:3.9.1"
-slug: radicale
 icon: icon.png
 logo: logo.png
+documentation: DOCS.md
+version: "3.8.7"
+slug: radicale
 description: >-
   Radicale is a small but powerful CalDAV (calendars, to-do lists) and
-  CardDAV (contacts) server. Supports htpasswd authentication and sharing.
+  CardDAV (contacts) server. Supports htpasswd authentication, sharing,
+  and automatic birthday calendar conversion.
 url: "https://radicale.org/"
 arch:
   - amd64
@@ -26,19 +27,19 @@ options:
   auth_type: "none"
   storage_folder: "/data/collections"
   log_level: "info"
-  sharing: "none"
-  bday_summary_template: "[{n:f} {n:g}|{fn}|{nickname}] ({year}) (BDAY)"
+  sharing: "default"
+  bday_summary_template: "[{n:f} {n:g}|{fn}|{nickname}] {age} ({year})"
   bday_description_template: "BDAY={year}-{month}-{day}"
   bday_alarm_trigger_template: ""
   bday_categories: "Birthday"
-  bday_age_max: 0
+  bday_age_max: 99
 schema:
   auth_type: "list(none|htpasswd)"
   storage_folder: str
   log_level: "list(debug|info|warning|error|critical)"
   sharing: "list(none|default)"
-  bday_summary_template: str
-  bday_description_template: str
-  bday_alarm_trigger_template: str
-  bday_categories: str
-  bday_age_max: int
+  bday_summary_template: str?
+  bday_description_template: str?
+  bday_alarm_trigger_template: str?
+  bday_categories: str?
+  bday_age_max: int?
