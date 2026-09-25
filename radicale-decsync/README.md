@@ -1,8 +1,5 @@
 # Home Assistant Add-on: Radicale DecSync
 
-[![GitHub Release](https://img.shields.io/github/v/release/patmansk/ha-addons)](https://github.com/patmansk/ha-addons)
-[![License](https://img.shields.io/github/license/patmansk/ha-addons)](LICENSE)
-
 A Home Assistant OS add-on that runs a [Radicale](https://radicale.org) CalDAV/CardDAV server with [DecSync](https://github.com/39aldo39/DecSync) storage integration for **serverless synchronization** of calendars, contacts, and tasks.
 
 ## What does this add-on do?
