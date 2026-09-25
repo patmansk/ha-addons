@@ -78,7 +78,7 @@ Radicale 3.8.0+ supports automatic conversion of birthday events from personal c
 | `bday_description_template` | Template for the event description. Available placeholders: `{fn}`, `{n:f}`, `{n:g}`, `{n:a}`, `{nickname}`, `{age}`, `{year}`, `{month}`, `{day}` | `BDAY={year}-{month}-{day}` |
 | `bday_alarm_trigger_template` | Alarm trigger(s) in ISO 8601 duration format, separated by `$` for multiple alarms. Each entry uses `<trigger>;<description>` format. Empty = no alarm | *(empty string)* |
 | `bday_categories` | Category name(s) to assign to converted events (plain string, not JSON) | `Birthday` |
-| `bday_age_max` | Maximum age to include in the converted calendar (0–199, 0 includes all ages). Radicale default: 99 | `99` |
+| `bday_age_max` | Maximum age to generate separate events for. **IMPORTANT:** Setting this to `0` is recommended for stability. If > 0, it generates one event per age, which may cause "Multiple main components" errors in Radicale <= 3.8.x. | `0` |
 
 ### Available Placeholders
 
@@ -98,18 +98,28 @@ The templates support the following placeholders (verified against `radicale.ite
 
 > **Note:** There is **no** `{name}` placeholder. Use `{fn}` for the full name.
 
-### Example
+### Example (Stable Configuration)
+
+> ⚠️ **Wichtig:** `bday_age_max: 0` ist die empfohlene und stabile Einstellung.
+> Werte > 0 führen zu einem bekannten Fehler ("Multiple main components") in Radicale,
+> da mehrere VEVENTs ohne `RECURRENCE-ID` erzeugt werden.
 
 ```yaml
 bday_summary_template: "[{n:f} {n:g}|{fn}|{nickname}] ({year}) (BDAY)"
 bday_description_template: "BDAY={year}-{month}-{day}"
 bday_alarm_trigger_template: "PT24H;Reminder"
 bday_categories: "Birthday"
-bday_age_max: 99
+bday_age_max: 0
 ```
 
-## Notes
+## Known Issues
 
-- The add-on requires the `share` map type for persistent storage.
-- For production use, enable htpasswd authentication and consider reverse-proxying with TLS.
-- The add-on uses `init: true` and `watchdog: true` for automatic restart on crash.
+### "Multiple main components" Error with `bday_age_max > 0`
+
+If you set `bday_age_max` to a value greater than 0, Radicale generates one separate `VEVENT` for each age. Because these events do not contain a `RECURRENCE-ID`, Radicale's internal filter (`radicale/item/filter.py`) interprets them as multiple "main" components within a single calendar, which causes a `ValueError` and crashes the request.
+
+**Workaround:**
+Keep `bday_age_max` set to `0`. This generates a single recurring event (`RRULE=FREQ=YEARLY`) which is fully supported and stable.
+
+**Upstream Issue:**
+This is a known limitation/bug in Radicale's birthday conversion logic. See [Kozea/Radicale#2237](https://github.com/Kozea/Radicale/issues/2237).
