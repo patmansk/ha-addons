@@ -2,7 +2,7 @@ name: Radicale
 icon: icon.png
 logo: logo.png
 documentation: DOCS.md
-version: "3.8.7"
+version: "3.8.10"
 slug: radicale
 description: >-
   Radicale is a small but powerful CalDAV (calendars, to-do lists) and
