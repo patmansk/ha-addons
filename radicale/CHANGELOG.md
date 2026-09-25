@@ -1,5 +1,15 @@
 # Changelog
 
+## 3.8.6
+
+- Added `conversion_bday_*` options for birthday calendar conversion
+- New options:
+  - `bday_summary_template`: Template for birthday event summary (default: "Birthday: {name}")
+  - `bday_description_template`: Template for birthday event description (default: "{name} is turning {age}")
+  - `bday_alarm_trigger_template`: Alarm trigger template (default: "PT0S")
+  - `bday_categories`: Categories for birthday events (default: "[]")
+  - `bday_age_max`: Maximum age for birthday events (default: 0)
+
 ## 3.8.0.0
 
 - Initial release

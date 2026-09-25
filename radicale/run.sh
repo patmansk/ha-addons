@@ -19,6 +19,11 @@ auth_type="$(jq --raw-output '.auth_type // "none"' "${CONFIG_PATH}")"
 storage_folder="$(jq --raw-output '.storage_folder // "/data/collections"' "${CONFIG_PATH}")"
 log_level="$(jq --raw-output '.log_level // "info"' "${CONFIG_PATH}")"
 sharing_enabled="$(jq --raw-output '.sharing // true' "${CONFIG_PATH}")"
+bday_summary_template="$(jq --raw-output '.bday_summary_template // "Birthday: {name}"' "${CONFIG_PATH}")"
+bday_description_template="$(jq --raw-output '.bday_description_template // "{name} is turning {age}"' "${CONFIG_PATH}")"
+bday_alarm_trigger_template="$(jq --raw-output '.bday_alarm_trigger_template // "PT0S"' "${CONFIG_PATH}")"
+bday_categories="$(jq --raw-output '.bday_categories // "[]"' "${CONFIG_PATH}")"
+bday_age_max="$(jq --raw-output '.bday_age_max // 0' "${CONFIG_PATH}")"
 
 log "Starting Radicale add-on..."
 log "  Auth type    : ${auth_type}"
@@ -59,6 +64,13 @@ chown -R radicale:radicale "${RADICALE_DATA}/collection-db" 2>/dev/null || true
     echo 'collection_by_map = true'
     echo 'permit_create_map = true'
     echo "database_path = ${RADICALE_DATA}/collection-db/sharing.csv"
+    echo ''
+    echo '[conversion_bday]'
+    echo "summary_template = ${bday_summary_template}"
+    echo "description_template = ${bday_description_template}"
+    echo "alarm_trigger_template = ${bday_alarm_trigger_template}"
+    echo "categories = ${bday_categories}"
+    echo "age_max = ${bday_age_max}"
     echo ''
     echo '[web]'
     echo 'type = internal'

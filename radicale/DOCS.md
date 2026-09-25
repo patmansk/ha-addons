@@ -68,6 +68,28 @@ http://<home-assistant-ip>:8123/api/addons/radicale/proxy/
 
 Point your client to `http://<ha-ip>:5232` with the configured credentials.
 
+## Birthday Calendar Conversion
+
+Radicale 3.8.0+ supports automatic conversion of birthday events from personal calendars into a separate "birthdays" calendar. The following options control this behavior:
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `bday_summary_template` | Template for the event summary. Available variables: `{name}`, `{age}` | `Birthday: {name}` |
+| `bday_description_template` | Template for the event description. Available variables: `{name}`, `{age}` | `{name} is turning {age}` |
+| `bday_alarm_trigger_template` | Alarm trigger (ISO 8601 duration). Use `PT0S` for immediate | `PT0S` |
+| `bday_categories` | JSON array of category names to assign | `[]` |
+| `bday_age_max` | Maximum age to include (0 = no limit) | `0` |
+
+### Example
+
+```yaml
+bday_summary_template: "🎂 {name} ({age})"
+bday_description_template: "{name} celebrates their {age}th birthday!"
+bday_alarm_trigger_template: "P1DT9H"  # 1 day and 9 hours before
+bday_categories: '["Birthdays", "Family"]'
+bday_age_max: 150
+```
+
 ## Notes
 
 - The add-on requires the `share` map type for persistent storage.
