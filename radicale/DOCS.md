@@ -74,20 +74,38 @@ Radicale 3.8.0+ supports automatic conversion of birthday events from personal c
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `bday_summary_template` | Template for the event summary. Available variables: `{name}`, `{age}` | `Birthday: {name}` |
-| `bday_description_template` | Template for the event description. Available variables: `{name}`, `{age}` | `{name} is turning {age}` |
-| `bday_alarm_trigger_template` | Alarm trigger (ISO 8601 duration). Use `PT0S` for immediate | `PT0S` |
-| `bday_categories` | JSON array of category names to assign | `[]` |
-| `bday_age_max` | Maximum age to include (0 = no limit) | `0` |
+| `bday_summary_template` | Template for the event summary. Available placeholders: `{fn}`, `{n:f}`, `{n:g}`, `{n:a}`, `{nickname}`, `{age}`, `{year}`, `{month}`, `{day}` | `[{n:f} {n:g}\|{fn}\|{nickname}] ({year}) (BDAY)` |
+| `bday_description_template` | Template for the event description. Available placeholders: `{fn}`, `{n:f}`, `{n:g}`, `{n:a}`, `{nickname}`, `{age}`, `{year}`, `{month}`, `{day}` | `BDAY={year}-{month}-{day}` |
+| `bday_alarm_trigger_template` | Alarm trigger(s) in ISO 8601 duration format, separated by `$` for multiple alarms. Each entry uses `<trigger>;<description>` format. Empty = no alarm | *(empty string)* |
+| `bday_categories` | Category name(s) to assign to converted events (plain string, not JSON) | `Birthday` |
+| `bday_age_max` | Maximum age to include in the converted calendar (0–199, 0 includes all ages). Radicale default: 99 | `99` |
+
+### Available Placeholders
+
+The templates support the following placeholders (verified against `radicale.item.VCF_TO_ICS_SUPPORTED_PLACEHOLDERS`):
+
+| Placeholder | Meaning |
+|-------------|---------|
+| `{fn}` | Full name (as in the contact) |
+| `{n:f}` | First / given name |
+| `{n:g}` | Last / family name |
+| `{n:a}` | Additional name |
+| `{nickname}` | Nickname (if set in the contact) |
+| `{age}` | Age in years |
+| `{year}` | Year of birth |
+| `{month}` | Month of birth (01–12) |
+| `{day}` | Day of birth (01–31) |
+
+> **Note:** There is **no** `{name}` placeholder. Use `{fn}` for the full name.
 
 ### Example
 
 ```yaml
-bday_summary_template: "🎂 {name} ({age})"
-bday_description_template: "{name} celebrates their {age}th birthday!"
-bday_alarm_trigger_template: "P1DT9H"  # 1 day and 9 hours before
-bday_categories: '["Birthdays", "Family"]'
-bday_age_max: 150
+bday_summary_template: "[{n:f} {n:g}|{fn}|{nickname}] ({year}) (BDAY)"
+bday_description_template: "BDAY={year}-{month}-{day}"
+bday_alarm_trigger_template: "PT24H;Reminder"
+bday_categories: "Birthday"
+bday_age_max: 99
 ```
 
 ## Notes

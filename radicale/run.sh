@@ -19,12 +19,12 @@ auth_type="$(jq --raw-output '.auth_type // "none"' "${CONFIG_PATH}")"
 storage_folder="$(jq --raw-output '.storage_folder // "/data/collections"' "${CONFIG_PATH}")"
 log_level="$(jq --raw-output '.log_level // "info"' "${CONFIG_PATH}")"
 sharing_enabled="$(jq --raw-output '.sharing // true' "${CONFIG_PATH}")"
-# NOTE: conversion_bday options are disabled until Radicale supports them (requires Radicale 3.9+)
-# bday_summary_template="$(jq --raw-output '.bday_summary_template // "Birthday: {name}"' "${CONFIG_PATH}")"
-# bday_description_template="$(jq --raw-output '.bday_description_template // "{name} is turning {age}"' "${CONFIG_PATH}")"
-# bday_alarm_trigger_template="$(jq --raw-output '.bday_alarm_trigger_template // "PT0S"' "${CONFIG_PATH}")"
-# bday_categories="$(jq --raw-output '.bday_categories // "[]"' "${CONFIG_PATH}")"
-# bday_age_max="$(jq --raw-output '.bday_age_max // 0' "${CONFIG_PATH}")"
+# Radicale 3.8.1 natively supports conversion_bday within the [sharing] section
+bday_summary_template="$(jq --raw-output '.bday_summary_template // "[{n:f} {n:g}|{fn}|{nickname}] ({year}) (BDAY)"' "${CONFIG_PATH}")"
+bday_description_template="$(jq --raw-output '.bday_description_template // "BDAY={year}-{month}-{day}"' "${CONFIG_PATH}")"
+bday_alarm_trigger_template="$(jq --raw-output '.bday_alarm_trigger_template // ""' "${CONFIG_PATH}")"
+bday_categories="$(jq --raw-output '.bday_categories // "Birthday"' "${CONFIG_PATH}")"
+bday_age_max="$(jq --raw-output '.bday_age_max // 99' "${CONFIG_PATH}")"
 
 log "Starting Radicale add-on..."
 log "  Auth type    : ${auth_type}"
@@ -65,6 +65,11 @@ chown -R radicale:radicale "${RADICALE_DATA}/collection-db" 2>/dev/null || true
     echo 'collection_by_map = true'
     echo 'permit_create_map = true'
     echo "database_path = ${RADICALE_DATA}/collection-db/sharing.csv"
+    echo "conversion_bday_summary_template = ${bday_summary_template}"
+    echo "conversion_bday_description_template = ${bday_description_template}"
+    echo "conversion_bday_alarm_trigger_template = ${bday_alarm_trigger_template}"
+    echo "conversion_bday_categories = ${bday_categories}"
+    echo "conversion_bday_age_max = ${bday_age_max}"
     echo ''
     echo '[web]'
     echo 'type = internal'
