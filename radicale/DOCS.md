@@ -64,10 +64,6 @@ http://<home-assistant-ip>:8123/api/addons/radicale/proxy/
 3. URL: `http://<ha-ip>:5232`
 4. Username/Password: as configured in htpasswd
 
-### Example: Nextcloud / Syncthing / etc.
-
-Point your client to `http://<ha-ip>:5232` with the configured credentials.
-
 ## Birthday Calendar Conversion
 
 Radicale 3.8.0+ supports automatic conversion of birthday events from personal calendars into a separate "birthdays" calendar. The following options control this behavior:
@@ -97,20 +93,6 @@ The templates support the following placeholders (verified against `radicale.ite
 | `{day}` | Day of birth (01–31) |
 
 > **Note:** There is **no** `{name}` placeholder. Use `{fn}` for the full name.
-
-### Example (Stable Configuration)
-
-> ⚠️ **Wichtig:** `bday_age_max: 0` ist die empfohlene und stabile Einstellung.
-> Werte > 0 führen zu einem bekannten Fehler ("Multiple main components") in Radicale,
-> da mehrere VEVENTs ohne `RECURRENCE-ID` erzeugt werden.
-
-```yaml
-bday_summary_template: "[{n:f} {n:g}|{fn}|{nickname}] ({year}) (BDAY)"
-bday_description_template: "BDAY={year}-{month}-{day}"
-bday_alarm_trigger_template: "PT24H;Reminder"
-bday_categories: "Birthday"
-bday_age_max: 0
-```
 
 ## Known Issues
 
