@@ -30,3 +30,10 @@
 - htpasswd authentication support
 - Persistent storage via shared folder
 - Configurable via add-on options
+## 3.8.10
+
+- Added `icon: icon.png` and `logo: logo.png` to config.yaml for proper HAOS UI display
+- Added `documentation: DOCS.md` to enable the Documentation tab in HAOS
+- Fixed version inconsistency (was reverted to 3.8.7, now properly bumped)
+- Fixed `run.sh` jq queries to correctly read `conversion_bday_*` options from user settings
+- Added missing `conversion_bday_categories` option to schema
