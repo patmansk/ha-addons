@@ -1,7 +1,4 @@
-name: Radicale
-icon: icon.png
-logo: logo.png
-documentation: DOCS.md
+name: "Radicale"
 version: "3.9.1"
 slug: radicale
 description: >-
