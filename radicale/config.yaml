@@ -40,3 +40,4 @@ schema:
   bday_alarm_trigger_template: str?
   bday_categories: str?
   bday_age_max: int?
+image: ghcr.io/patmansk/ha-addons/radicale:3.9.1
