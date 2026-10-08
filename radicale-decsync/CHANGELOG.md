@@ -1,6 +1,9 @@
 # Changelog
 
 
+## 1.2.14
+- **Update:** Radicale auf 3.8.2 aktualisiert (Upstream Release)
+
 ## 1.2.13
 - **Update:** Radicale auf 3.8.1 aktualisiert (Fixes für Issue #2237)
 

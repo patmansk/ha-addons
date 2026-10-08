@@ -1,5 +1,10 @@
 # Changelog
 
+## 3.9.2
+- Bumped Radicale version to 3.8.2 (upstream release)
+- Updated documentation and references to match new Radicale version
+- Removed "Known Issues" section from DOCS.md (issues resolved or migrated to upstream)
+
 ## 3.9.1
 
 - Added `icon`, `logo`, and `documentation` fields to `config.yaml` for proper HAOS UI display

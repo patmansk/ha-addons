@@ -2,7 +2,7 @@
 
 Radicale is a small but powerful CalDAV (calendars, to-do lists) and CardDAV (contacts) server.
 
-This add-on provides a pre-configured Radicale 3.8.2 instance for Home Assistant OS.
+This add-on provides a pre-configured Radicale 3.9.2 instance for Home Assistant OS.
 
 ## Features
 

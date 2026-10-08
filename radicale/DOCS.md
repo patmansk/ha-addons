@@ -3,7 +3,7 @@
 ## Overview
 
 Radicale is a small but powerful CalDAV (calendars, to-do lists) and CardDAV (contacts) server.
-This add-on runs Radicale 3.8.2 inside a Docker container managed by the Home Assistant Supervisor.
+This add-on runs Radicale 3.9.2 inside a Docker container managed by the Home Assistant Supervisor.
 
 ## Configuration
 
@@ -66,7 +66,7 @@ http://<home-assistant-ip>:8123/api/addons/radicale/proxy/
 
 ## Birthday Calendar Conversion
 
-Radicale 3.8.2 supports automatic conversion of birthday events from personal calendars into a separate "birthdays" calendar. The following options control this behavior:
+Radicale 3.9.2 supports automatic conversion of birthday events from personal calendars into a separate "birthdays" calendar. The following options control this behavior:
 
 | Option | Description | Default |
 |--------|-------------|---------|
