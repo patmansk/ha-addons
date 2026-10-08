@@ -6,6 +6,7 @@ on:
       - 'radicale/Dockerfile'
       - 'radicale/run.sh'
       - 'radicale/config.yaml'
+      - '.github/workflows/build-radicaler.yaml'
     branches:
       - main
   workflow_dispatch:
