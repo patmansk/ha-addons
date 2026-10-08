@@ -19,7 +19,7 @@ auth_type="$(jq --raw-output '.auth_type // "none"' "${CONFIG_PATH}")"
 storage_folder="$(jq --raw-output '.storage_folder // "/data/collections"' "${CONFIG_PATH}")"
 log_level="$(jq --raw-output '.log_level // "info"' "${CONFIG_PATH}")"
 sharing_enabled="$(jq --raw-output '.sharing // true' "${CONFIG_PATH}")"
-# Radicale 3.8.1 natively supports conversion_bday within the [sharing] section
+# Radicale 3.8.2 natively supports conversion_bday within the [sharing] section
 bday_summary_template="$(jq --raw-output '.conversion_bday_summary_template // "[{n:f} {n:g}|{fn}|{nickname}] ({year}) (BDAY)"' "${CONFIG_PATH}")"
 bday_description_template="$(jq --raw-output '.conversion_bday_description_template // "BDAY={year}-{month}-{day}"' "${CONFIG_PATH}")"
 bday_alarm_trigger_template="$(jq --raw-output '.conversion_bday_alarm_trigger_template // ""' "${CONFIG_PATH}")"

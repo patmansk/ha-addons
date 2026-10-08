@@ -3,7 +3,7 @@
 ## Overview
 
 Radicale is a small but powerful CalDAV (calendars, to-do lists) and CardDAV (contacts) server.
-This add-on runs Radicale 3.8.0 inside a Docker container managed by the Home Assistant Supervisor.
+This add-on runs Radicale 3.8.2 inside a Docker container managed by the Home Assistant Supervisor.
 
 ## Configuration
 
@@ -66,7 +66,7 @@ http://<home-assistant-ip>:8123/api/addons/radicale/proxy/
 
 ## Birthday Calendar Conversion
 
-Radicale 3.8.0+ supports automatic conversion of birthday events from personal calendars into a separate "birthdays" calendar. The following options control this behavior:
+Radicale 3.8.2 supports automatic conversion of birthday events from personal calendars into a separate "birthdays" calendar. The following options control this behavior:
 
 | Option | Description | Default |
 |--------|-------------|---------|
@@ -94,14 +94,4 @@ The templates support the following placeholders (verified against `radicale.ite
 
 > **Note:** There is **no** `{name}` placeholder. Use `{fn}` for the full name.
 
-## Known Issues
 
-### "Multiple main components" Error with `bday_age_max > 0`
-
-If you set `bday_age_max` to a value greater than 0, Radicale generates one separate `VEVENT` for each age. Because these events do not contain a `RECURRENCE-ID`, Radicale's internal filter (`radicale/item/filter.py`) interprets them as multiple "main" components within a single calendar, which causes a `ValueError` and crashes the request.
-
-**Workaround:**
-Keep `bday_age_max` set to `0`. This generates a single recurring event (`RRULE=FREQ=YEARLY`) which is fully supported and stable.
-
-**Upstream Issue:**
-This is a known limitation/bug in Radicale's birthday conversion logic. See [Kozea/Radicale#2237](https://github.com/Kozea/Radicale/issues/2237).
