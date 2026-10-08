@@ -16,9 +16,18 @@ jobs:
       - name: Get version from config.yaml
         id: version
         run: |
-          VERSION=$(grep '^version:' radicale-decsync/config.yaml | sed 's/version: *"\(.*\)"/\1/')
+          VERSION=$(awk -F': *' '/^version:/ {print $2}' radicale-decsync/config.yaml | tr -d '"')
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Detected version: $VERSION"
+
+      - name: Validate version
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          if [ -z "$VERSION" ]; then
+            echo "::error::Version could not be extracted from config.yaml"
+            exit 1
+          fi
+          echo "Valid version: $VERSION"
 
       - name: Check if release already exists
         id: check
