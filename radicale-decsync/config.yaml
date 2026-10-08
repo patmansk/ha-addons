@@ -1,6 +1,6 @@
 name: "Radicale DecSync"
 version: "1.2.14"
-image: ghcr.io/patmansk/ha-addons/radicale-decsync:1.2.14
+image: ghcr.io/patmansk/ha-addons/radicale-decsync
 slug: "radicale-decsync"
 icon: "icon.png"
 logo: "logo.png"
