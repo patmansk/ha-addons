@@ -1,7 +1,7 @@
 name: "Radicale"
 version: "3.9.2"
 image: ghcr.io/patmansk/ha-addons/radicale:latest
-slug: radicale
+slug: "radicale"
 icon: "icon.png"
 logo: "logo.png"
 documentation: "https://github.com/patmansk/ha-addons/tree/main/radicale#readme"
@@ -15,7 +15,7 @@ arch:
   - aarch64
 init: false
 startup: application
-boot: auto
+boot: "auto"
 webui: "http://[HOST]:[PORT:5232]"
 ports:
   5232/tcp: 5232
