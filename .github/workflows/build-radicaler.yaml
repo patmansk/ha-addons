@@ -67,3 +67,4 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/radicale:cache
           cache-to: type=registry,ref=ghcr.io/${{ github.repository }}/radicale:cache,mode=max
+          provenance: false
