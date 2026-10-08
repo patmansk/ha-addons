@@ -5,26 +5,34 @@ on:
     branches:
       - main
     paths:
+      - "radicale/config.yaml"
       - "radicale-decsync/config.yaml"
 
 jobs:
   release:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - addon: radicale
+            dir: radicale
+          - addon: radicale-decsync
+            dir: radicale-decsync
     steps:
       - uses: actions/checkout@v4
 
       - name: Get version from config.yaml
         id: version
         run: |
-          VERSION=$(awk -F': *' '/^version:/ {print $2}' radicale-decsync/config.yaml | tr -d '"')
+          VERSION=$(awk -F': *' '/^version:/ {print $2}' ${{ matrix.dir }}/config.yaml | tr -d '"')
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-          echo "Detected version: $VERSION"
+          echo "Detected version for ${{ matrix.addon }}: $VERSION"
 
       - name: Validate version
         run: |
           VERSION="${{ steps.version.outputs.version }}"
           if [ -z "$VERSION" ]; then
-            echo "::error::Version could not be extracted from config.yaml"
+            echo "::error::Version could not be extracted from ${{ matrix.dir }}/config.yaml"
             exit 1
           fi
           echo "Valid version: $VERSION"
@@ -32,7 +40,8 @@ jobs:
       - name: Check if release already exists
         id: check
         run: |
-          if gh release view "v${{ steps.version.outputs.version }}" > /dev/null 2>&1; then
+          TAG="v${{ matrix.addon }}-${{ steps.version.outputs.version }}"
+          if gh release view "$TAG" > /dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
             echo "exists=false" >> "$GITHUB_OUTPUT"
@@ -45,19 +54,18 @@ jobs:
         id: changelog
         run: |
           VERSION="${{ steps.version.outputs.version }}"
-          # Extract the section for this version from CHANGELOG.md
-          NOTES=$(awk "/^## ${VERSION}/{flag=1; next} /^## /{flag=0} flag" radicale-decsync/CHANGELOG.md)
+          NOTES=$(awk "/^## ${VERSION}/{flag=1; next} /^## /{flag=0} flag" ${{ matrix.dir }}/CHANGELOG.md)
           if [ -z "$NOTES" ]; then
             NOTES="Release v${VERSION}"
           fi
-          # Write to file to preserve multiline
           echo "$NOTES" > /tmp/release_notes.md
 
       - name: Create GitHub release
         if: steps.check.outputs.exists == 'false'
         run: |
-          gh release create "v${{ steps.version.outputs.version }}" \
-            --title "v${{ steps.version.outputs.version }}" \
+          TAG="v${{ matrix.addon }}-${{ steps.version.outputs.version }}"
+          gh release create "$TAG" \
+            --title "$TAG" \
             --notes-file /tmp/release_notes.md \
             --target main
         env:
