@@ -1,7 +1,7 @@
 name: "Radicale DecSync"
 version: "1.2.14"
 image: ghcr.io/patmansk/ha-addons/radicale-decsync:1.2.14
-slug: "radicale_decsync"
+slug: "radicale-decsync"
 icon: "icon.png"
 logo: "logo.png"
 documentation: "https://github.com/patmansk/ha-addons/tree/main/radicale-decsync#readme"

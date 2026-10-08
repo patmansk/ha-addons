@@ -1,6 +1,6 @@
 name: "Radicale"
 version: "3.9.2"
-image: ghcr.io/patmansk/ha-addons/radicale:latest
+image: ghcr.io/patmansk/ha-addons/radicale:3.9.2
 slug: "radicale"
 icon: "icon.png"
 logo: "logo.png"
