@@ -66,3 +66,4 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=registry,ref=ghcr.io/${{ github.repository }}/radicale-decsync:latest
           cache-to: type=registry,ref=ghcr.io/${{ github.repository }}/radicale-decsync:latest,mode=max
+          provenance: false
