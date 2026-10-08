@@ -1,6 +1,6 @@
 name: "Radicale"
-version: "3.9.1"
-image: ghcr.io/patmansk/ha-addons/radicale:3.9.1
+version: "3.8.2"
+image: ghcr.io/patmansk/ha-addons/radicale:3.8.2
 slug: radicale
 description: >-
   Radicale is a small but powerful CalDAV (calendars, to-do lists) and
