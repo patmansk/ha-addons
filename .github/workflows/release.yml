@@ -28,7 +28,7 @@ jobs:
       - name: Get version from config.yaml
         id: version
         run: |
-          VERSION=$(awk -F': *' '/^version:/ {print $2}'-${{ matrix.dir }}/config.yaml | tr -d '"')
+          VERSION=$(awk -F': *' '/^version:/ {print $2}' ${{ matrix.dir }}/config.yaml | tr -d '"')
           echo "version=$VERSION" >> "$GITHUB_OUTPUT"
           echo "Detected version for ${{ matrix.addon }}: $VERSION"
 
