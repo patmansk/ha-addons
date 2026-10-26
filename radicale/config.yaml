@@ -29,7 +29,7 @@ options:
   storage_folder: "/data/collections"
   log_level: "info"
   sharing: "default"
-  bday_summary_template: "[{n:f} {n:g}|{fn}|{nickname}] {age} ({year})"
+  bday_summary_template: "[{fn}|{nickname}] [{age}|] [({year})|]"
   bday_description_template: "BDAY={year}-{month}-{day}"
   bday_alarm_trigger_template: ""
   bday_categories: "Birthday"
