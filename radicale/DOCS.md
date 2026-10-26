@@ -70,11 +70,11 @@ Radicale 3.9.2 supports automatic conversion of birthday events from personal ca
 
 | Option | Description | Default |
 |--------|-------------|---------|
-| `bday_summary_template` | Template for the event summary. Available placeholders: `{fn}`, `{n:f}`, `{n:g}`, `{n:a}`, `{nickname}`, `{age}`, `{year}`, `{month}`, `{day}` | `[{n:f} {n:g}\|{fn}\|{nickname}] ({year}) (BDAY)` |
+| `bday_summary_template` | Template for the event summary. Available placeholders: `{fn}`, `{n:f}`, `{n:g}`, `{n:a}`, `{nickname}`, `{age}`, `{year}`, `{month}`, `{day}` | `[{fn}|{nickname}] [{age}|] [({year})|]` |
 | `bday_description_template` | Template for the event description. Available placeholders: `{fn}`, `{n:f}`, `{n:g}`, `{n:a}`, `{nickname}`, `{age}`, `{year}`, `{month}`, `{day}` | `BDAY={year}-{month}-{day}` |
 | `bday_alarm_trigger_template` | Alarm trigger(s) in ISO 8601 duration format, separated by `$` for multiple alarms. Each entry uses `<trigger>;<description>` format. Empty = no alarm | *(empty string)* |
 | `bday_categories` | Category name(s) to assign to converted events (plain string, not JSON) | `Birthday` |
-| `bday_age_max` | Maximum age to generate separate events for. **IMPORTANT:** Setting this to `0` is recommended for stability. If > 0, it generates one event per age, which may cause "Multiple main components" errors in Radicale <= 3.8.x. | `0` |
+| `bday_age_max` | Maximum age to generate separate events for. | `0` |
 
 ### Available Placeholders
 
