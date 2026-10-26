@@ -44,7 +44,7 @@ jobs:
       - name: Check if release already exists
         id: check
         run: |
-          TAG="${{ matrix.addon }}-${{ steps.version.outputs.version }}"
+          TAG="${{ matrix.addon }} ${{ steps.version.outputs.version }}"
           if gh release view "$TAG" > /dev/null 2>&1; then
             echo "exists=true" >> "$GITHUB_OUTPUT"
           else
