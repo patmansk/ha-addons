@@ -1,5 +1,8 @@
 # Changelog
 
+## 3.9.5
+- Bumped Radicale version to 3.9.2 (upstream release)
+
 ## 3.9.4
 - Bumped Radicale version to 3.9.1 (upstream release)
 
